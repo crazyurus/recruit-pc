@@ -43,18 +43,21 @@ function getCompany(result: any): Company {
 
 export async function getSeminarList(options: {
   page: number;
+  size: number;
   search?: string;
-}): Promise<Seminar[]> {
-  const { page, search = '' } = options;
+}): Promise<{
+  total: number;
+  items: Seminar[];
+}> {
+  const { page, size, search = '' } = options;
   const data = await request('/preach/getlist', {
     page,
-    size: 10,
+    size,
     isunion: 2,
     laiyuan: 0,
     keywords: search,
-  }) as unknown as { list: any[] };
-
-  return data.list.map((item: any) => {
+  }) as unknown as { list: any[]; count: number };
+  const items = data.list.map((item: any) => {
     return {
       id: item.id,
       title: item.title,
@@ -79,6 +82,11 @@ export async function getSeminarList(options: {
       positions: [],
     };
   });
+
+  return {
+    total: data.count,
+    items,
+  };
 }
 
 export async function getSeminarDetail(options: { id: string }): Promise<SeminarDetail> {

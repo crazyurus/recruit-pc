@@ -12,7 +12,7 @@ interface Store {
 
 const useStore = create<Store, [['zustand/immer', never]]>(immer((set, get) => ({
   page: 1,
-  size: 10,
+  size: 8,
   search: '',
   setCurrentPage(page) {
     set(state => {
