@@ -2,12 +2,12 @@ import React, { Fragment, useState, useRef } from 'react';
 import { useDebounce } from 'react-use';
 import useSWR from 'swr';
 import Head from 'next/head';
+import Link from 'next/link';
 import useStore from '../store';
 import { getSeminarList } from '../service';
 import Seminar from '../components/seminar';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
-import type { NextPage } from 'next';
 
 function List(): JSX.Element | null {
   const totalRef = useRef(0);
@@ -33,7 +33,9 @@ function List(): JSX.Element | null {
       <div style={{ minHeight: 'calc(100vh - 290px)' }}>
       {data ? (
         data.items.length === 0 ? empty : data.items.map(item => (
-          <Seminar key={item.id} {...item} />
+          <Link key={item.id} href={`/detail/${item.id}`}>
+            <a><Seminar {...item} /></a>
+          </Link>
         ))
       ) : <Loading height={size * 104} />}
       </div>
@@ -47,7 +49,7 @@ function List(): JSX.Element | null {
   );
 }
 
-const Home: NextPage = () => {
+function Home(): JSX.Element {
   return (
     <Fragment>
       <Head>

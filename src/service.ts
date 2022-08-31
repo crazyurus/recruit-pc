@@ -28,12 +28,12 @@ function getCompany(result: any): Company {
     region: result.province_name + (result.city_name === '市辖区' ? '' : result.city_name) + result.region_name,
     industry: result.business_name,
     scale: result.guimo_id_name,
-    registeredCapital: result.catype_name,
-    website: result.weburl,
+    registeredCapital: result.catype_name || '',
+    website: result.weburl || '',
     address: result.address,
     createTime: formatTimestamp(result.start_time),
     verifyTime: result.verify_time === 0 ? '' : formatTimestamp(result.verify_time),
-    license: result.license,
+    license: result.license || '',
     position: {
       latitude: result.latitude,
       longitude: result.longitude,
@@ -89,8 +89,7 @@ export async function getSeminarList(options: {
   };
 }
 
-export async function getSeminarDetail(options: { id: string }): Promise<SeminarDetail> {
-  const { id } = options;
+export async function getSeminarDetail(id: string): Promise<SeminarDetail> {
   const result: any = await request('/preach/detail', {
     id,
   });
@@ -123,8 +122,7 @@ export async function getSeminarDetail(options: { id: string }): Promise<Seminar
 }
 
 
-export async function getCompanyDetail(options: { id: string }): Promise<Company> {
-  const { id } = options;
+export async function getCompanyDetail(id: string): Promise<Company> {
   const result = await request('/com/detail', {
     id,
   });

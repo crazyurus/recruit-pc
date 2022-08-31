@@ -3,11 +3,17 @@ import Header from './header';
 import Content from './content';
 import Footer from './footer';
 
-function Layout(props: PropsWithChildren<{}>): JSX.Element {
+interface Props {
+  title: string;
+}
+
+function Layout(props: PropsWithChildren<Props>): JSX.Element {
+  const { title = '宣讲会', children } = props;
+
   return (
     <div className="min-h-full bg-gray-100">
-      <Header>宣讲会</Header>
-      <Content>{props.children}</Content>
+      <Header>{title}</Header>
+      <Content>{children}</Content>
       <Footer />
     </div>
   );
