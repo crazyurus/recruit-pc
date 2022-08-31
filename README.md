@@ -4,7 +4,7 @@
 
 https://whut-recruit-pc.vercel.app/
 
-`React` + `Next.js` + `Semi Design`
+`React` + `Next.js` + `tailwindcss`
 
 ## 项目脚本
 
