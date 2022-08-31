@@ -8,7 +8,7 @@ function Seminar(props: Props): JSX.Element {
 
   return (
     <div className="relative flex space-x-6 py-6 px-5 xl:static cursor-pointer hover:bg-indigo-50">
-      <Image src={company.logo} alt={company.name} className="flex-none rounded-full" width={56} height={56} />
+      <Image src={company.logo} alt={company.name} className="flex-none rounded-md" width={56} height={56} />
       <div className="flex-auto">
         <h3 className="pr-10 font-semibold text-gray-900 xl:pr-0">{title}</h3>
         <dl className="mt-2 flex flex-col text-gray-500 xl:flex-row">

@@ -10,6 +10,10 @@ interface Props {
 }
 
 function getPageList(current: number, totalPage: number): number[] {
+  if (totalPage < 9) {
+    return Array.from(new Array(totalPage + 1).keys()).slice(1);
+  }
+
   if (current <= 3 || current >= totalPage - 2) {
     return [1, 2, 3, totalPage - 2, totalPage - 1, totalPage];
   }
@@ -19,9 +23,10 @@ function getPageList(current: number, totalPage: number): number[] {
 
 function Pagination(props: Props): JSX.Element | null {
   const { current, total, pageSize, onChange } = props;
+  const end = (current - 1) * pageSize + pageSize;
   const cursor = {
-    begin: (current - 1) * 10 + 1,
-    end: (current - 1) * 10 + pageSize,
+    begin: (current - 1) * pageSize + 1,
+    end: end > total ? total : end,
   };
   const totalPage = Math.ceil(total / pageSize);
   const canPrevious = current > 1;
@@ -54,8 +59,7 @@ function Pagination(props: Props): JSX.Element | null {
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{cursor.begin}</span> to <span className="font-medium">{cursor.end}</span> of{' '}
-            <span className="font-medium">{total}</span> results
+            显示第 <span className="font-medium">{cursor.begin}</span> 至第 <span className="font-medium">{cursor.end}</span> 个，共 <span className="font-medium">{total}</span> 个宣讲会
           </p>
         </div>
         <div>
