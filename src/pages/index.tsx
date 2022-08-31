@@ -13,10 +13,13 @@ function List(): JSX.Element | null {
   const totalRef = useRef(0);
   const [ debouncedSearch, setDebouncedSearch ] = useState('');
   const { page, size, search, setCurrentPage } = useStore();
-  const { data } = useSWR(`/list?page=${page}&search=${debouncedSearch}`, getSeminarList.bind(null, { page, size, search: debouncedSearch }));
+  const { data } = useSWR(`/list?page=${page}&size=${size}search=${debouncedSearch}`, getSeminarList.bind(null, { page, size, search: debouncedSearch }));
 
   useDebounce(() => {
-    setCurrentPage(1);
+    if (search !== debouncedSearch) {
+      setCurrentPage(1);
+    }
+
     setDebouncedSearch(search);
   }, 500, [search]);
 
