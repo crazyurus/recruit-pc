@@ -12,9 +12,9 @@ function Header(props: PropsWithChildren<{}>): JSX.Element {
 
   return (
     <header className={classNames(styles.header, 'bg-indigo-600', 'py-10')}>
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-col-reverse sm:flex-row">
         <h1 className="text-3xl font-bold text-white">{props.children}</h1>
-        {showSearch && <Search width={320} onChange={setSearch} />}
+        {showSearch && <Search className={styles.search} onChange={setSearch} />}
       </div>
     </header>
   );
