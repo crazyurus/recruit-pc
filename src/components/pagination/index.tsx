@@ -78,12 +78,12 @@ function Pagination(props: Props): JSX.Element | null {
                   <a
                     onClick={() => handleChange(page)}
                     aria-current="page"
-                    className={classNames('relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer', current === page ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50')}
+                    className={classNames('relative inline-flex items-center justify-center w-10 py-2 border text-sm font-medium cursor-pointer', current === page ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50')}
                   >
                     {page}
                   </a>
                   {needSeparate ? (
-                    <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                    <span className="relative inline-flex items-center justify-center w-10 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
                     …
                   </span>
                   ) : null}

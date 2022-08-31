@@ -12,6 +12,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   overflow-y: overlay;
   -webkit-tap-highlight-color: transparent;
+  cursor: default;
+  user-select: none;
 }
 
 a {

@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import Head from 'next/head';
 import { getSeminarDetail } from '../../service';
 import type { GetServerSidePropsContext } from 'next';
 import type { SeminarDetail } from '../../types';
+import styles from './id.module.scss';
 
 interface Props {
   title: string;
@@ -18,7 +20,15 @@ function Detail(props: Props): JSX.Element {
         <title>{detail.title}</title>
       </Head>
       <div className="p-6">
-        <div dangerouslySetInnerHTML={{ __html: detail.content }}></div>
+        <div className={classNames(styles.content, 'cursor-text', 'select-text', 'markdown-body')}>
+          <div dangerouslySetInnerHTML={{ __html: detail.content }}></div>
+          {detail.tips ? (
+            <blockquote>
+              <p>温馨提醒：</p>
+              <p>{detail.tips}</p>
+            </blockquote>
+          ) : null}
+        </div>
       </div>
     </Fragment>
   );
