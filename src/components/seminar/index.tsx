@@ -8,11 +8,11 @@ function StatusTag(props: { value: Status }): JSX.Element {
 
   switch (status) {
     case Status.IN_PROGRESS:
-      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">进行中</div>;
+      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 flex-shrink-0">进行中</div>;
     case Status.CANCELED:
-      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">已取消</div>;
+      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800 flex-shrink-0">已取消</div>;
     case Status.EXPIRED:
-      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">已结束</div>;
+      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 flex-shrink-0">已结束</div>;
   }
 }
 

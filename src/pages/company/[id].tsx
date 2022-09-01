@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { getCompanyDetail } from '../../service';
+import Layout from '../../components/layout';
 import type { GetServerSidePropsContext } from 'next';
 import type { Company } from '../../types';
 
@@ -59,7 +60,7 @@ function Detail(props: Props): JSX.Element {
           </div>
           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">简介</dt>
-            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 cursor-text select-text">{detail.introduction}</dd>
+            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 cursor-text select-text whitespace-pre-wrap">{detail.introduction}</dd>
           </div>
         </dl>
       </div>
@@ -67,16 +68,18 @@ function Detail(props: Props): JSX.Element {
   );
 }
 
-function getTitle(props: Props): JSX.Element {
+function getLayout(page: JSX.Element, props: Props): JSX.Element {
+  const { title, detail } = props;
+  const description = (
+    <div className="mt-3">
+      {detail.tags.map(tag => (
+        <span key={tag} className="inline-block bg-white bg-opacity-20 text-white text-xs tracking-wide rounded-md mr-3 px-2 py-1">{tag}</span>
+      ))}
+    </div>
+  );
+
   return (
-    <Fragment>
-      <div>{props.title}</div>
-      <div>
-        {props.detail.tags.map(tag => (
-          <span key={tag} className="inline-block bg-white bg-opacity-20 text-white text-xs tracking-wide rounded-md mr-3 px-2 py-1">{tag}</span>
-        ))}
-      </div>
-    </Fragment>
+    <Layout title={title} description={description}>{page}</Layout>
   );
 }
 
@@ -92,6 +95,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
   };
 }
 
-Detail.getTitle = getTitle;
+Detail.getLayout = getLayout;
 
 export default Detail;

@@ -1,22 +1,24 @@
-import React, { PropsWithChildren } from 'react';
+import React, { ComponentProps, PropsWithChildren } from 'react';
 import Header from './header';
 import Content from './content';
 import Footer from './footer';
 
-interface Props {
-  title: JSX.Element;
-}
+type Props = ComponentProps<typeof Header>;
 
 function Layout(props: PropsWithChildren<Props>): JSX.Element {
-  const { title = '宣讲会', children } = props;
+  const { children, ...rest } = props;
 
   return (
     <div className="min-h-full bg-gray-100">
-      <Header>{title}</Header>
+      <Header {...rest} />
       <Content>{children}</Content>
       <Footer />
     </div>
   );
 }
+
+Layout.defaultProps = {
+  title: ' ',
+};
 
 export default Layout;

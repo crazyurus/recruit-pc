@@ -5,9 +5,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import useStore from '../store';
 import { getSeminarList } from '../service';
+import Layout from '../components/layout';
 import Seminar from '../components/seminar';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
+import Search from '../components/search';
 
 function List(): JSX.Element | null {
   const totalRef = useRef(0);
@@ -64,5 +66,13 @@ function Home(): JSX.Element {
     </Fragment>
   );
 }
+
+function getLayout(page: JSX.Element): JSX.Element {
+  return (
+    <Layout title="宣讲会" action={<Search />}>{page}</Layout>
+  );
+}
+
+Home.getLayout = getLayout;
 
 export default Home;

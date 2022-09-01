@@ -25,6 +25,10 @@ a {
   box-sizing: border-box;
 }
 
+*::selection {
+  @apply bg-indigo-100;
+}
+
 input {
   outline: none;
 }

@@ -1,10 +1,6 @@
 .content {
   user-select: text;
   cursor: text;
-
-  *::selection, &::selection {
-    @apply bg-indigo-100;
-  }
 }
 
 .title {
