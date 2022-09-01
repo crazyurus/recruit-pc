@@ -18,7 +18,7 @@ function Detail(props: Props): JSX.Element {
         <title>{title}</title>
       </Head>
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg leading-6 font-medium font-mono">{detail.license}</h3>
+        <h3 className="text-lg leading-6 font-semibold font-mono">{detail.license}</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">统一社会信用代码</p>
       </div>
       <div className="border-t border-gray-200">

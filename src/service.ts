@@ -1,8 +1,13 @@
 import request from './utils/request';
 import { unique, formatTimestamp } from './utils/format';
-import type { Company, Seminar, SeminarDetail, Status } from './types';
+import type { Company, Seminar, SeminarDetail } from './types';
 
-function getStatus(status: Status): number {
+function getStatus(status: {
+  isExpired: boolean;
+  isCancel: boolean;
+  isOfficial: boolean;
+  isInProgress: boolean;
+}): number {
   if (status.isInProgress) return 1;
   if (status.isCancel) return 2;
   if (status.isExpired) return 3;

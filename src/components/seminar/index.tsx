@@ -1,10 +1,23 @@
 import React from 'react';
 import { CalendarIcon, LocationMarkerIcon, EyeIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
-import type { Seminar as Props } from '../../types';
+import { Seminar as Props, Status } from '../../types';
+
+function StatusTag(props: { value: Status }): JSX.Element {
+  const status = props.value;
+
+  switch (status) {
+    case Status.IN_PROGRESS:
+      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">进行中</div>;
+    case Status.CANCELED:
+      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">已取消</div>;
+    case Status.EXPIRED:
+      return <div className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">已结束</div>;
+  }
+}
 
 function Seminar(props: Props): JSX.Element {
-  const { title, company, time, address, view } = props;
+  const { title, company, time, address, view, status } = props;
 
   return (
     <div className="relative flex space-x-6 py-6 px-5 sm:static cursor-pointer sm:hover:bg-indigo-50 active:bg-indigo-50">
@@ -12,7 +25,10 @@ function Seminar(props: Props): JSX.Element {
         <Image src={company.logo} alt={company.name} className="rounded-md" width={56} height={56} />
       </div>
       <div className="flex-grow">
-        <h3 className="pr-10 font-semibold text-gray-900 sm:pr-0">{title}</h3>
+        <div className="flex justify-between items-center">
+          <h3 className="pr-10 font-semibold text-gray-900 sm:pr-0">{title}</h3>
+          <StatusTag value={status} />
+        </div>
         <dl className="mt-2 flex flex-col text-gray-500 sm:flex-row">
           <div className="flex items-center space-x-2">
             <dt>

@@ -9,11 +9,10 @@ interface Contact {
   telephone: string;
 }
 
-export interface Status {
-  isExpired: boolean;
-  isCancel: boolean;
-  isOfficial: boolean;
-  isInProgress: boolean;
+export enum Status {
+  IN_PROGRESS = 1,
+  CANCELED,
+  EXPIRED,
 }
 
 export interface Company {
@@ -44,7 +43,7 @@ export interface Seminar {
   address: string;
   view: number;
   time: string;
-  status: number;
+  status: Status;
   source: string;
 }
 
