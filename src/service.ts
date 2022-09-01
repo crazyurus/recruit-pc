@@ -121,7 +121,6 @@ export async function getSeminarDetail(id: string): Promise<SeminarDetail> {
   };
 }
 
-
 export async function getCompanyDetail(id: string): Promise<Company> {
   const result = await request('/com/detail', {
     id,
