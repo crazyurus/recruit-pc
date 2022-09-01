@@ -11,6 +11,9 @@ module.exports = {
         white: '#fff',
         primary: '#4f46e5',
       },
+      maxWidth: {
+        '1/2': '50%',
+      },
     },
   },
   plugins: [],

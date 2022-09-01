@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import Head from 'next/head';
 import Link from 'next/link';
 import { getSeminarDetail } from '../../service';
@@ -26,16 +27,16 @@ function Detail(props: Props): JSX.Element {
     </Fragment>
   ) : null;
   const basicInfo = (
-    <div className={styles.basic}>
-      <div className={styles.col}>
+    <div className={classNames(styles.basic, 'md:flex')}>
+      <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
         <div className={styles.label}>宣讲时间</div>
         <div className={styles.value}>{detail.time}</div>
       </div>
-      <div className={styles.col}>
+      <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
         <div className={styles.label}>宣讲地点</div>
         <div className={styles.value}>{detail.address}</div>
       </div>
-      <div className={styles.col}>
+      <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
         <div className={styles.label}>招聘企业</div>
         <div className={styles.value}>
           <Link href={`/company/${detail.company.id}`}>
@@ -43,7 +44,7 @@ function Detail(props: Props): JSX.Element {
           </Link>
         </div>
       </div>
-      <div className={styles.col}>
+      <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
         <div className={styles.label}>来源</div>
         <div className={styles.value}>{detail.source}</div>
       </div>

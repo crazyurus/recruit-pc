@@ -17,13 +17,10 @@
 }
 
 .basic {
-  display: flex;
   flex-flow: row wrap;
 
   .col {
-    display: flex;
     flex: 0 0 50%;
-    max-width: 50%;
     margin-bottom: 1rem;
   }
 
