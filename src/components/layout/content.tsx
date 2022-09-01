@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import Loading from '../loading';
@@ -25,7 +24,7 @@ function Content(props: PropsWithChildren<{}>): JSX.Element {
       router.events.off('routeChangeComplete', handleRouteChangeComplete);
       router.events.off('routeChangeError', handleRouteChangeComplete);
     };
-  }, []);
+  }, [router]);
 
   return (
     <main className="-mt-32">

@@ -1,3 +1,35 @@
-.content *::selection {
-  @apply bg-indigo-100;
+.content {
+  user-select: text;
+  cursor: text;
+
+  *::selection, &::selection {
+    @apply bg-indigo-100;
+  }
+}
+
+.title {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 0.7;
+  margin: 1rem 0;
+  border-bottom: 6px solid unquote(theme('colors.primary') + '99');
+}
+
+.basic {
+  display: flex;
+  flex-flow: row wrap;
+
+  .col {
+    display: flex;
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1rem;
+  }
+
+  .label {
+    @apply text-gray-500;
+    margin-right: 1rem;
+    min-width: 6rem;
+  }
 }
