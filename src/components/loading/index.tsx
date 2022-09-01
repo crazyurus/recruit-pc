@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  height: number;
+  height: number | string;
 }
 
 function Loading(props: Props): JSX.Element {

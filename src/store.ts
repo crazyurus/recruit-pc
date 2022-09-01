@@ -10,7 +10,7 @@ interface Store {
   setSearch(search: Store['search']): void;
 }
 
-const useStore = create<Store, [['zustand/immer', never]]>(immer((set, get) => ({
+const useStore = create<Store, [['zustand/immer', never]]>(immer(set => ({
   page: 1,
   size: 8,
   search: '',
