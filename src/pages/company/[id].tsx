@@ -71,9 +71,9 @@ function Detail(props: Props): JSX.Element {
 function getLayout(page: JSX.Element, props: Props): JSX.Element {
   const { title, detail } = props;
   const description = (
-    <div className="mt-3">
+    <div className="mt-3 -mb-2">
       {detail.tags.map(tag => (
-        <span key={tag} className="inline-block bg-white bg-opacity-20 text-white text-xs tracking-wide rounded-md mr-3 px-2 py-1">{tag}</span>
+        <span key={tag} className="inline-block bg-white bg-opacity-20 text-white text-xs tracking-wide rounded-md mb-2 mr-3 px-2 py-1">{tag}</span>
       ))}
     </div>
   );
