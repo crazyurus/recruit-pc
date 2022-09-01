@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
+import { ShareIcon } from '@heroicons/react/solid';
 import Head from 'next/head';
 import Link from 'next/link';
 import { getSeminarDetail } from '../../service';
@@ -50,6 +51,16 @@ function Detail(props: Props): JSX.Element {
       </div>
     </div>
   );
+  const handleShare = () => {
+    if ('share' in navigator) {
+      navigator.share({
+        url: location.href,
+        title: document.title,
+      });
+    } else {
+      alert('当前浏览器暂不支持分享');
+    }
+  };
 
   return (
     <Fragment>
@@ -69,6 +80,12 @@ function Detail(props: Props): JSX.Element {
           <a href={`mailto:${detail.contact.email}`}>{detail.contact.email}</a>
         </p>
         {tips}
+        <div className="flex items-center justify-center py-4">
+          <div className="flex items-center rounded-md bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 px-5 py-2 cursor-pointer" onClick={handleShare}>
+            <ShareIcon className="h-5 w-5 mr-2" />
+            <span>分享</span>
+          </div>
+        </div>
       </div>
     </Fragment>
   );
