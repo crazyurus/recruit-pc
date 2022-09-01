@@ -29,7 +29,7 @@ function Content(props: PropsWithChildren<{}>): JSX.Element {
   return (
     <main className="-mt-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow overflow-hidden" style={{ minHeight: height }}>
+        <div className="bg-white rounded-lg shadow" style={{ minHeight: height }}>
           {loading ? <Loading height={height} /> : props.children}
         </div>
       </div>

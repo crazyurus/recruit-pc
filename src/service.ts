@@ -38,6 +38,8 @@ function getCompany(result: any): Company {
       latitude: result.latitude,
       longitude: result.longitude,
     },
+    introduction: result.content || '',
+    tags: result.tagcomlist.map((item: any) => item.title),
   };
 }
 
@@ -79,7 +81,7 @@ export async function getSeminarList(options: {
       }),
       contact: {},
       source: '武汉理工大学学生就业指导中心',
-      positions: [],
+      major: [],
     };
   });
 
@@ -117,7 +119,7 @@ export async function getSeminarDetail(id: string): Promise<SeminarDetail> {
       telephone: result.phone,
     },
     source: '武汉理工大学学生就业指导中心',
-    positions: unique(result.ProfessionalList.map((item: any) => item.professional_id_name)),
+    major: unique(result.ProfessionalList.map((item: any) => item.professional_id_name)),
   };
 }
 

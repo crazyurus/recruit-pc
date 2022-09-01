@@ -12,17 +12,17 @@ interface Props {
 }
 
 function Detail(props: Props): JSX.Element {
-  const { detail } = props;
+  const { title, detail } = props;
   const tips = detail.tips ? (
     <Fragment>
       <div className={styles.title}>本校提醒</div>
       <p className={styles.content}>{detail.tips}</p>
     </Fragment>
   ) : null;
-  const positions = detail.positions.length > 0 ? (
+  const major = detail.major.length > 0 ? (
     <Fragment>
       <div className={styles.title}>招聘专业</div>
-      <p className={styles.content}>{detail.positions.join('、')}</p>
+      <p className={styles.content}>{detail.major.join('、')}</p>
     </Fragment>
   ) : null;
   const basicInfo = (
@@ -50,12 +50,10 @@ function Detail(props: Props): JSX.Element {
     </div>
   );
 
-  console.log(detail)
-
   return (
     <Fragment>
       <Head>
-        <title>{detail.title}</title>
+        <title>{title}</title>
       </Head>
       <div className="markdown-body p-6">
         {basicInfo}
@@ -64,7 +62,7 @@ function Detail(props: Props): JSX.Element {
           className={styles.content}
           dangerouslySetInnerHTML={{ __html: detail.content }}
         />
-        {positions}
+        {major}
         <div className={styles.title}>联系方式</div>
         <p>
           <a href={`mailto:${detail.contact.email}`}>{detail.contact.email}</a>

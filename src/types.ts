@@ -32,6 +32,8 @@ export interface Company {
   verifyTime: string;
   license: string;
   position: Location;
+  introduction: string;
+  tags: string[];
 }
 
 export interface Seminar {
@@ -52,5 +54,5 @@ export interface SeminarDetail extends Seminar {
   tips: string;
   poster: string;
   contact: Contact;
-  positions: string[];
+  major: string[];
 }

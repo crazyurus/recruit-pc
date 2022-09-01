@@ -4,7 +4,7 @@ import Content from './content';
 import Footer from './footer';
 
 interface Props {
-  title: string;
+  title: JSX.Element;
 }
 
 function Layout(props: PropsWithChildren<Props>): JSX.Element {
