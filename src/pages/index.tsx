@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useRef } from 'react';
 import { useDebounce } from 'react-use';
 import useSWR from 'swr';
-import Head from 'next/head';
 import Link from 'next/link';
 import useStore from '../store';
 import { getSeminarList } from '../service';
@@ -56,14 +55,9 @@ function List(): JSX.Element | null {
 
 function Home(): JSX.Element {
   return (
-    <Fragment>
-      <Head>
-        <title>武汉理工大学就业招聘</title>
-      </Head>
-      <div className="pt-6">
-        <List />
-      </div>
-    </Fragment>
+    <div className="pt-6">
+      <List />
+    </div>
   );
 }
 

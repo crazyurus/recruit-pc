@@ -20,12 +20,14 @@ function getDefaultLayout(page: JSX.Element, pageProps: any): JSX.Element {
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const { title = '武汉理工大学就业招聘' } = pageProps;
   const getLayout = Component.getLayout ?? getDefaultLayout;
 
   return (
     <Fragment>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <title>{title}</title>
       </Head>
       {getLayout(<Component {...pageProps} />, pageProps)}
     </Fragment>

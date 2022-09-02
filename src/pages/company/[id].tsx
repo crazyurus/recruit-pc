@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import Head from 'next/head';
 import { getCompanyDetail } from '../../service';
 import Layout from '../../components/layout';
 import type { GetServerSidePropsContext } from 'next';
@@ -11,13 +10,10 @@ interface Props {
 }
 
 function Detail(props: Props): JSX.Element {
-  const { title, detail } = props;
+  const { detail } = props;
 
   return (
     <Fragment>
-      <Head>
-        <title>{title}</title>
-      </Head>
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg leading-6 font-semibold font-mono">{detail.license}</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">统一社会信用代码</p>

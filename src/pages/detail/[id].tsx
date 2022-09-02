@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { ShareIcon } from '@heroicons/react/solid';
-import Head from 'next/head';
 import Link from 'next/link';
 import { getSeminarDetail } from '../../service';
 import type { GetServerSidePropsContext } from 'next';
@@ -14,7 +13,7 @@ interface Props {
 }
 
 function Detail(props: Props): JSX.Element {
-  const { title, detail } = props;
+  const { detail } = props;
   const tips = detail.tips ? (
     <Fragment>
       <div className={styles.title}>本校提醒</div>
@@ -63,31 +62,26 @@ function Detail(props: Props): JSX.Element {
   };
 
   return (
-    <Fragment>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <div className="markdown-body p-6">
-        {basicInfo}
-        <div className={styles.title}>宣讲会内容</div>
-        <div
-          className={styles.content}
-          dangerouslySetInnerHTML={{ __html: detail.content }}
-        />
-        {major}
-        <div className={styles.title}>联系方式</div>
-        <p>
-          <a href={`mailto:${detail.contact.email}`}>{detail.contact.email}</a>
-        </p>
-        {tips}
-        <div className="flex items-center justify-center py-4">
-          <div className="flex items-center rounded-md bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 px-5 py-2 cursor-pointer" onClick={handleShare}>
-            <ShareIcon className="h-5 w-5 mr-2" />
-            <span>分享</span>
-          </div>
+    <div className="markdown-body p-6">
+      {basicInfo}
+      <div className={styles.title}>宣讲会内容</div>
+      <div
+        className={styles.content}
+        dangerouslySetInnerHTML={{ __html: detail.content }}
+      />
+      {major}
+      <div className={styles.title}>联系方式</div>
+      <p>
+        <a href={`mailto:${detail.contact.email}`}>{detail.contact.email}</a>
+      </p>
+      {tips}
+      <div className="flex items-center justify-center py-4">
+        <div className="flex items-center rounded-md bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 px-5 py-2 cursor-pointer" onClick={handleShare}>
+          <ShareIcon className="h-5 w-5 mr-2" />
+          <span>分享</span>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
 
