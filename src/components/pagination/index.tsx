@@ -9,16 +9,26 @@ interface Props {
   onChange(page: number): void;
 }
 
+function generateArray(start: number, end: number): number[] {
+  return Array.from(new Array(end + 1).keys()).slice(start);
+}
+
 function getPageList(current: number, totalPage: number): number[] {
-  if (totalPage < 9) {
-    return Array.from(new Array(totalPage + 1).keys()).slice(1);
+  const count = 9;
+  const border = {
+    previous: (count - 1) / 2,
+    next: totalPage - (count - 3) / 2,
+  };
+
+  if (totalPage <= count) {
+    return generateArray(1, totalPage);
   }
 
-  if (current <= 3 || current >= totalPage - 2) {
-    return [1, 2, 3, totalPage - 2, totalPage - 1, totalPage];
+  if (current <= border.previous || current >= border.next) {
+    return generateArray(1, 4).concat(generateArray(totalPage - 3, totalPage));
   }
 
-  return [1, 2, current - 1, current, current + 1, totalPage - 1, totalPage];
+  return generateArray(1, current === border.previous + 1 ? 3 : 2).concat(generateArray(current - 1, current + 1), generateArray(current === border.next - 1 ? totalPage - 2 : totalPage - 1, totalPage));
 }
 
 function Pagination(props: Props): JSX.Element | null {
