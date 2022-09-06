@@ -26,7 +26,7 @@ function Seminar(props: Props): JSX.Element {
       </div>
       <div className="flex-grow">
         <div className="flex justify-between items-center">
-          <h3 className="pr-10 font-semibold text-gray-900 sm:pr-0">{title}</h3>
+          <div className="pr-10 font-semibold text-gray-900 sm:pr-0">{title}</div>
           <StatusTag value={status} />
         </div>
         <dl className="mt-2 flex flex-col text-gray-500 sm:flex-row">

@@ -53,18 +53,18 @@ function Pagination(props: Props): JSX.Element | null {
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
-        <a
+        <div
           onClick={() => handleChange(current - 1)}
           className={classNames('relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md bg-white', canPrevious ? 'text-gray-700 hover:bg-gray-50 cursor-pointer' : 'text-gray-400 cursor-not-allowed')}
         >
           上一页
-        </a>
-        <a
+        </div>
+        <div
           onClick={() => handleChange(current + 1)}
           className={classNames('ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md bg-white', canNext ? 'text-gray-700 hover:bg-gray-50 cursor-pointer' : 'text-gray-400 cursor-not-allowed')}
         >
           下一页
-        </a>
+        </div>
       </div>
       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
@@ -74,24 +74,24 @@ function Pagination(props: Props): JSX.Element | null {
         </div>
         <div>
           <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-            <a
+            <div
               onClick={() => handleChange(current - 1)}
               className={classNames('relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium', canPrevious ? 'text-gray-500 hover:bg-gray-50 cursor-pointer' : 'text-gray-400 cursor-not-allowed')}
             >
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
+            </div>
             {pageList.map((page, index) => {
               const needSeparate = index > 0 && page < pageList[index + 1] - 1;
 
               return (
                 <Fragment key={page}>
-                  <a
+                  <div
                     onClick={() => handleChange(page)}
                     aria-current="page"
                     className={classNames('relative inline-flex items-center justify-center w-10 py-2 border text-sm font-medium cursor-pointer', current === page ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50')}
                   >
                     {page}
-                  </a>
+                  </div>
                   {needSeparate ? (
                     <span className="relative inline-flex items-center justify-center w-10 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
                     …
@@ -100,12 +100,12 @@ function Pagination(props: Props): JSX.Element | null {
                 </Fragment>
               );
             })}
-            <a
+            <div
               onClick={() => handleChange(current + 1)}
               className={classNames('relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium', canNext ? 'text-gray-500 hover:bg-gray-50 cursor-pointer' : 'text-gray-400 cursor-not-allowed')}
             >
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
+            </div>
           </nav>
         </div>
       </div>

@@ -15,8 +15,8 @@ function Detail(props: Props): JSX.Element {
   return (
     <Fragment>
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg leading-6 font-semibold font-mono">{detail.license}</h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">统一社会信用代码</p>
+        <div className="mb-1 max-w-2xl text-sm text-gray-500">统一社会信用代码</div>
+        <div className="text-lg leading-6 font-mono cursor-text select-text">{detail.license}</div>
       </div>
       <div className="border-t border-gray-200">
         <dl>
