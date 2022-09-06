@@ -23,7 +23,11 @@ function getCDNURL(url: string): string {
   return url + '!y';
 }
 
-function getCompany(result: any): Company {
+function getCompany(result: any): Company | null {
+  if (!result) {
+    return null;
+  }
+
   return {
     id: result.id,
     name: result.name,
@@ -104,7 +108,7 @@ export async function getSeminarDetail(id: string): Promise<SeminarDetail> {
   return {
     id: result.id,
     title: result.title,
-    company: getCompany(result.comInfo),
+    company: getCompany(result.comInfo) as Company,
     university: result.school_id_name,
     address: result.address || result.tmp_field_name || '线上宣讲会',
     view: result.viewcount,
@@ -133,5 +137,5 @@ export async function getCompanyDetail(id: string): Promise<Company> {
     id,
   });
 
-  return getCompany(result);
+  return getCompany(result) as Company;
 }

@@ -36,14 +36,16 @@ function Detail(props: Props): JSX.Element {
         <div className={styles.label}>宣讲地点</div>
         <div className={styles.value}>{detail.address}</div>
       </div>
-      <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
-        <div className={styles.label}>招聘企业</div>
-        <div className={styles.value}>
-          <Link href={`/company/${detail.company.id}`}>
-            <a>{detail.company.name}</a>
-          </Link>
+      {detail.company ? (
+        <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
+          <div className={styles.label}>招聘企业</div>
+          <div className={styles.value}>
+            <Link href={`/company/${detail.company.id}`}>
+              <a>{detail.company.name}</a>
+            </Link>
+          </div>
         </div>
-      </div>
+      ) : null}
       <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
         <div className={styles.label}>来源</div>
         <div className={styles.value}>{detail.source}</div>
@@ -70,10 +72,14 @@ function Detail(props: Props): JSX.Element {
         dangerouslySetInnerHTML={{ __html: detail.content }}
       />
       {major}
-      <div className={styles.title}>联系方式</div>
-      <p>
-        <a href={`mailto:${detail.contact.email}`}>{detail.contact.email}</a>
-      </p>
+      {detail.contact.email ? (
+        <Fragment>
+          <div className={styles.title}>联系方式</div>
+          <p>
+            <a href={`mailto:${detail.contact.email}`}>{detail.contact.email}</a>
+          </p>
+        </Fragment>
+      ) : null}
       {tips}
       <div className="flex items-center justify-center py-4">
         <div className="flex items-center rounded-md bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 px-5 py-2 cursor-pointer" onClick={handleShare}>
