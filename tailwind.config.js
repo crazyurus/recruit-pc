@@ -9,7 +9,6 @@ module.exports = {
       colors: {
         black: '#1f2329',
         white: '#fff',
-        primary: '#4f46e5',
       },
       maxWidth: {
         '1/2': '50%',

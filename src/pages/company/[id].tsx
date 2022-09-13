@@ -46,7 +46,7 @@ function Detail(props: Props): JSX.Element {
           </div>
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">企业网站</dt>
-            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 text-primary hover:underline">
+            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 text-indigo-600 hover:underline">
               <a href={`http://${detail.website}`} target="_blank" rel="noreferrer">{detail.website}</a>
             </dd>
           </div>

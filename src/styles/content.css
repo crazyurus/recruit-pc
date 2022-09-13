@@ -45,7 +45,7 @@
 
 .markdown-body a {
   background-color: transparent;
-  color: theme('colors.primary');
+  color: theme('colors.indigo.600');
   text-decoration: none;
 }
 
@@ -892,7 +892,7 @@
   left: -24px;
   pointer-events: none;
   content: "";
-  border: 2px solid theme('colors.primary');
+  border: 2px solid theme('colors.indigo.600');
   border-radius: 6px;
 }
 
