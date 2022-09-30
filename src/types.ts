@@ -44,7 +44,6 @@ export interface Seminar {
   view: number;
   time: string;
   status: Status;
-  source: string;
 }
 
 export interface SeminarDetail extends Seminar {

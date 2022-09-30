@@ -5,6 +5,7 @@ import Link from 'next/link';
 import useStore from '../store';
 import { getSeminarList } from '../service';
 import Layout from '../components/layout';
+import Select from '../components/select';
 import Seminar from '../components/seminar';
 import Pagination from '../components/pagination';
 import Loading from '../components/loading';
@@ -13,8 +14,8 @@ import Search from '../components/search';
 function List(): JSX.Element | null {
   const totalRef = useRef(0);
   const [ debouncedSearch, setDebouncedSearch ] = useState('');
-  const { page, size, search, setCurrentPage } = useStore();
-  const { data } = useSWR(`/list?page=${page}&size=${size}search=${debouncedSearch}`, getSeminarList.bind(null, { page, size, search: debouncedSearch }));
+  const { page, size, search, school, setCurrentPage } = useStore();
+  const { data } = useSWR(`/list?page=${page}&size=${size}search=${debouncedSearch}&school=${school}`, getSeminarList.bind(null, { page, size, search: debouncedSearch, school }));
 
   useDebounce(() => {
     if (search !== debouncedSearch) {
@@ -37,7 +38,7 @@ function List(): JSX.Element | null {
       <div style={{ minHeight: 'calc(100vh - 290px)' }}>
       {data ? (
         data.items.length === 0 ? empty : data.items.map(item => (
-          <Link key={item.id} href={`/detail/${item.id}`}>
+          <Link key={item.id} href={`/${school}/detail/${item.id}`}>
             <a><Seminar {...item} /></a>
           </Link>
         ))
@@ -63,7 +64,7 @@ function Home(): JSX.Element {
 
 function getLayout(page: JSX.Element): JSX.Element {
   return (
-    <Layout title="宣讲会" action={<Search />}>{page}</Layout>
+    <Layout title={<Select />} action={<Search />}>{page}</Layout>
   );
 }
 

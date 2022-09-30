@@ -2,15 +2,18 @@ import create from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 interface Store {
+  school: string;
   page: number;
   size: number;
   search: string;
   setCurrentPage(page: Store['page']): void;
   setPageSize(size: Store['size']): void;
   setSearch(search: Store['search']): void;
+  setSchool(school: Store['school']): void;
 }
 
 const useStore = create<Store, [['zustand/immer', never]]>(immer(set => ({
+  school: 'b525083d-b83c-4c7e-892f-29909421d961',
   page: 1,
   size: 8,
   search: '',
@@ -27,6 +30,11 @@ const useStore = create<Store, [['zustand/immer', never]]>(immer(set => ({
   setSearch(search) {
     set(state => {
       state.search = search;
+    });
+  },
+  setSchool(school) {
+    set(state => {
+      state.school = school;
     });
   },
 })));

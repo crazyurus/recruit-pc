@@ -20,7 +20,7 @@ function getDefaultLayout(page: JSX.Element, pageProps: any): JSX.Element {
 }
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const { title = '武汉理工大学就业招聘' } = pageProps;
+  const { title = '就业招聘' } = pageProps;
   const getLayout = Component.getLayout ?? getDefaultLayout;
 
   return (

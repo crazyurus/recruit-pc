@@ -2,6 +2,10 @@ import request from './utils/request';
 import { unique, formatTimestamp } from './utils/format';
 import type { Company, Seminar, SeminarDetail } from './types';
 
+interface CommonParameter {
+  school: string;
+}
+
 function getStatus(status: {
   isExpired: boolean;
   isCancel: boolean;
@@ -56,17 +60,18 @@ export async function getSeminarList(options: {
   page: number;
   size: number;
   search?: string;
-}): Promise<{
+} & CommonParameter): Promise<{
   total: number;
   items: Seminar[];
 }> {
-  const { page, size, search = '' } = options;
+  const { page, size, search = '', school } = options;
   const data = await request('/preach/getlist', {
     page,
     size,
     isunion: 2,
     laiyuan: 0,
     keywords: search,
+    school,
   }) as unknown as { list: any[]; count: number };
   const items = data.list.map((item: any) => {
     return {
@@ -89,7 +94,6 @@ export async function getSeminarList(options: {
         isInProgress: item.timestatus === 1,
       }),
       contact: {},
-      source: '武汉理工大学学生就业指导中心',
       major: [],
     };
   });
@@ -100,10 +104,8 @@ export async function getSeminarList(options: {
   };
 }
 
-export async function getSeminarDetail(id: string): Promise<SeminarDetail> {
-  const result: any = await request('/preach/detail', {
-    id,
-  });
+export async function getSeminarDetail(params: { id: string } & CommonParameter): Promise<SeminarDetail> {
+  const result: any = await request('/preach/detail', params);
 
   return {
     id: result.id,
@@ -127,7 +129,6 @@ export async function getSeminarDetail(id: string): Promise<SeminarDetail> {
       email: result.email,
       telephone: result.phone,
     },
-    source: '武汉理工大学学生就业指导中心',
     major: unique(result.ProfessionalList.map((item: any) => item.professional_id_name)),
   };
 }

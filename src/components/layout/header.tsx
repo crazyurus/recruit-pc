@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './header.module.scss';
 
 interface Props {
-  title: string;
+  title: JSX.Element | string;
   description?: JSX.Element;
   action?: JSX.Element;
 }

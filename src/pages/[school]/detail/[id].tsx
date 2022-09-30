@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import { ShareIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
-import { getSeminarDetail } from '../../service';
+import { getSeminarDetail } from '../../../service';
 import type { GetServerSidePropsContext } from 'next';
-import type { SeminarDetail } from '../../types';
+import type { SeminarDetail } from '../../../types';
 import styles from './id.module.scss';
 
 interface Props {
@@ -48,7 +48,7 @@ function Detail(props: Props): JSX.Element {
       ) : null}
       <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
         <div className={styles.label}>来源</div>
-        <div className={styles.value}>{detail.source}</div>
+        <div className={styles.value}>{detail.university}</div>
       </div>
     </div>
   );
@@ -92,8 +92,7 @@ function Detail(props: Props): JSX.Element {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<{ props: Props }> {
-  const { id } = context.params as { id: string };
-  const detail = await getSeminarDetail(id);
+  const detail = await getSeminarDetail(context.params as any);
 
   return {
     props: {

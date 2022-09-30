@@ -10,11 +10,15 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(config => {
+  const schoolID = config.data.school || '';
+
+  delete config.data.school;
+
   Object.assign(config.data, {
-    school_id: 'b525083d-b83c-4c7e-892f-29909421d961',
+    school_id: schoolID,
     login_user_id: 1,
     login_admin_school_code: '',
-    login_admin_school_id: 'b525083d-b83c-4c7e-892f-29909421d961',
+    login_admin_school_id: schoolID,
   });
 
   const query = new URLSearchParams(config.data);
