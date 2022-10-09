@@ -12,14 +12,17 @@ type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 }
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
+  Component: NextPageWithLayout;
+  pageProps: {
+    title?: string;
+  };
 }
 
 function getDefaultLayout(page: JSX.Element, pageProps: any): JSX.Element {
   return <Layout title={pageProps.title}>{page}</Layout>;
 }
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function App({ Component, pageProps }: AppPropsWithLayout) {
   const { title = '就业招聘' } = pageProps;
   const getLayout = Component.getLayout ?? getDefaultLayout;
 
@@ -34,4 +37,4 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   );
 }
 
-export default MyApp;
+export default App;
