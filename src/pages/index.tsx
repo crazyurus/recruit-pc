@@ -39,7 +39,7 @@ function List(): JSX.Element | null {
       {data ? (
         data.items.length === 0 ? empty : data.items.map(item => (
           <Link key={item.id} href={`/${school}/detail/${item.id}`}>
-            <a><Seminar {...item} /></a>
+            <Seminar {...item} />
           </Link>
         ))
       ) : <Loading height={size * 104} />}

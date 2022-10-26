@@ -40,9 +40,7 @@ function Detail(props: Props): JSX.Element {
         <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
           <div className={styles.label}>招聘企业</div>
           <div className={styles.value}>
-            <Link href={`/company/${detail.company.id}`}>
-              <a>{detail.company.name}</a>
-            </Link>
+            <Link href={`/company/${detail.company.id}`}>{detail.company.name}</Link>
           </div>
         </div>
       ) : null}
