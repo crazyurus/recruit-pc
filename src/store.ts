@@ -1,8 +1,9 @@
 import create from 'zustand';
 import { immer } from 'zustand/middleware/immer';
+import type { School } from './types';
 
 interface Store {
-  school: string;
+  school: School;
   page: number;
   size: number;
   search: string;
@@ -13,7 +14,10 @@ interface Store {
 }
 
 const useStore = create<Store, [['zustand/immer', never]]>(immer(set => ({
-  school: 'b525083d-b83c-4c7e-892f-29909421d961',
+  school: {
+    id: 'b525083d-b83c-4c7e-892f-29909421d961',
+    name: '武汉理工大学',
+  },
   page: 1,
   size: 8,
   search: '',

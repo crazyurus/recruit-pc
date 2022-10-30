@@ -1,9 +1,9 @@
 import request from './utils/request';
 import { unique, formatTimestamp } from './utils/format';
-import type { Company, Seminar, SeminarDetail } from './types';
+import type { School, Company, Seminar, SeminarDetail } from './types';
 
 interface CommonParameter {
-  school: string;
+  school: School['id'];
 }
 
 function getStatus(status: {
@@ -139,4 +139,12 @@ export async function getCompanyDetail(id: string): Promise<Company> {
   });
 
   return getCompany(result) as Company;
+}
+
+export async function getSchoolList(): Promise<School[]> {
+  const result: any = await request('/School/getlistName', {
+    is_vip: 1,
+  });
+
+  return result.list.filter((item: any) => item.id !== '03697650-72ef-d353-1e69-b4c86f150f54');
 }

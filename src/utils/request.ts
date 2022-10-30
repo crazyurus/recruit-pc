@@ -41,7 +41,7 @@ instance.interceptors.response.use(response => {
   return Promise.reject(error);
 });
 
-function request(url: string, data: any) {
+function request(url: string, data: any = {}) {
   return instance({
     url,
     data,

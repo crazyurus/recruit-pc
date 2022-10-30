@@ -9,6 +9,11 @@ interface Contact {
   telephone: string;
 }
 
+export interface School {
+  id: string;
+  name: string;
+}
+
 export enum Status {
   IN_PROGRESS = 1,
   CANCELED,

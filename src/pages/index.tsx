@@ -15,7 +15,7 @@ function List(): JSX.Element | null {
   const totalRef = useRef(0);
   const [ debouncedSearch, setDebouncedSearch ] = useState('');
   const { page, size, search, school, setCurrentPage } = useStore();
-  const { data } = useSWR(`/list?page=${page}&size=${size}search=${debouncedSearch}&school=${school}`, getSeminarList.bind(null, { page, size, search: debouncedSearch, school }));
+  const { data } = useSWR(`/list?page=${page}&size=${size}search=${debouncedSearch}&school=${school.id}`, getSeminarList.bind(null, { page, size, search: debouncedSearch, school: school.id }));
 
   useDebounce(() => {
     if (search !== debouncedSearch) {
@@ -29,8 +29,10 @@ function List(): JSX.Element | null {
     totalRef.current = data.total;
   }
 
-  const empty = (
+  const empty = debouncedSearch ? (
     <div className="px-6">未找到与 <strong>{debouncedSearch}</strong> 有关的宣讲会</div>
+  ) : (
+    <div className="px-6"><strong>{school.name}</strong>暂无宣讲会信息</div>
   );
 
   return (
@@ -38,7 +40,7 @@ function List(): JSX.Element | null {
       <div style={{ minHeight: 'calc(100vh - 290px)' }}>
       {data ? (
         data.items.length === 0 ? empty : data.items.map(item => (
-          <Link key={item.id} href={`/${school}/detail/${item.id}`}>
+          <Link key={item.id} href={`/${school.id}/detail/${item.id}`}>
             <Seminar {...item} />
           </Link>
         ))
