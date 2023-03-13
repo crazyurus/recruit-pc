@@ -43,11 +43,7 @@ function Select(): JSX.Element {
                 >
                   {({ selected }) => (
                     <Fragment>
-                      <span
-                        className={`block truncate ${
-                          selected ? 'font-medium text-indigo-700' : 'font-normal'
-                        }`}
-                      >
+                      <span className={`block truncate ${selected ? 'font-medium text-indigo-700' : 'font-normal'}`}>
                         {item.name}
                       </span>
                       {selected ? (
