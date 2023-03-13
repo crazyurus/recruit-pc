@@ -2,10 +2,11 @@ import React, { useEffect, useState, PropsWithChildren } from 'react';
 import { useRouter } from 'next/router';
 import Loading from '../loading';
 
+const height = 'calc(100vh - 203px)';
+
 function Content(props: PropsWithChildren<{}>): JSX.Element {
   const router = useRouter();
-  const [ loading, setLoading ] = useState(false);
-  const height = 'calc(100vh - 203px)';
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleRouteChangeStart = () => {

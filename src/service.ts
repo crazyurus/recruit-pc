@@ -1,6 +1,6 @@
 import request from './utils/request';
 import { unique, formatTimestamp } from './utils/format';
-import type { School, Company, Seminar, SeminarDetail } from './types';
+import type { School, Company, Seminar, SeminarDetail, SeminarBase } from './types';
 
 interface CommonParameter {
   school: School['id'];
@@ -36,7 +36,12 @@ function getCompany(result: any): Company | null {
     id: result.id,
     name: result.name,
     logo: getCDNURL(result.logo_src),
-    description: (!result.city_name || result.city_name === '市辖区' ? result.province_name : result.city_name) + ' ' + result.xingzhi_id_name + ' ' + result.business_name,
+    description:
+      (!result.city_name || result.city_name === '市辖区' ? result.province_name : result.city_name) +
+      ' ' +
+      result.xingzhi_id_name +
+      ' ' +
+      result.business_name,
     type: result.xingzhi_id_name,
     region: result.province_name + (result.city_name === '市辖区' ? '' : result.city_name) + result.region_name,
     industry: result.business_name,
@@ -56,23 +61,25 @@ function getCompany(result: any): Company | null {
   };
 }
 
-export async function getSeminarList(options: {
-  page: number;
-  size: number;
-  search?: string;
-} & CommonParameter): Promise<{
+export async function getSeminarList(
+  options: {
+    page: number;
+    size: number;
+    search?: string;
+  } & CommonParameter
+): Promise<{
   total: number;
   items: Seminar[];
 }> {
   const { page, size, search = '', school } = options;
-  const data = await request('/preach/getlist', {
+  const data = (await request('/preach/getlist', {
     page,
     size,
     isunion: 2,
     laiyuan: 0,
     keywords: search,
     school,
-  }) as unknown as { list: any[]; count: number };
+  })) as unknown as { list: any[]; count: number };
   const items = data.list.map((item: any) => {
     return {
       id: item.id,
@@ -102,6 +109,34 @@ export async function getSeminarList(options: {
     total: data.count,
     items,
   };
+}
+
+export async function getSeminarCalendar(
+  options: {
+    year: number;
+    month: number;
+  } & CommonParameter
+): Promise<Record<string, SeminarBase[]>> {
+  const { year, month, school } = options;
+  const data = (await request('/preach/dategetlist', {
+    year,
+    month,
+    laiyuan: 0,
+    isair: 3,
+    school,
+  })) as unknown as any[];
+  const result: Record<string, SeminarBase[]> = {};
+
+  for (const item of data) {
+    const { key, list } = item;
+
+    result[key] = list.map((each: any) => ({
+      id: each.id,
+      title: each.title,
+    }));
+  }
+
+  return result;
 }
 
 export async function getSeminarDetail(params: { id: string } & CommonParameter): Promise<SeminarDetail> {

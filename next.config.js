@@ -6,7 +6,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ['s11.jiuyeb.cn', 'pic1.jiuyebao2015.com'],
+    domains: ['s1.jiuyeb.cn', 's11.jiuyeb.cn', 'pic1.jiuyebao2015.com'],
   },
   output: 'standalone',
 };

@@ -40,10 +40,13 @@ export interface Company {
   tags: string[];
 }
 
-export interface Seminar {
+export interface SeminarBase {
   id: string;
   title: string;
-  company: Pick<Company, 'id' | 'name' | 'logo' | 'description'>,
+}
+
+export interface Seminar extends SeminarBase {
+  company: Pick<Company, 'id' | 'name' | 'logo' | 'description'>;
   university: string;
   address: string;
   view: number;
