@@ -1,8 +1,25 @@
 import React, { Fragment } from 'react';
 import { getCompanyDetail } from '../../service';
+import FallbackSSR from '../../fallback';
 import Layout from '../../components/layout';
 import type { GetServerSidePropsContext } from 'next';
 import type { Company } from '../../types';
+
+async function getServerSidePropsOrigin(context: GetServerSidePropsContext): Promise<{ props: Props }> {
+  const { id } = context.params as { id: string };
+  const detail = await getCompanyDetail(id);
+
+  return {
+    props: {
+      title: detail.name,
+      detail,
+    },
+  };
+}
+
+const fallbackSSR = new FallbackSSR({
+  getServerSideProps: getServerSidePropsOrigin,
+});
 
 interface Props {
   title: string;
@@ -47,7 +64,9 @@ function Detail(props: Props): JSX.Element {
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">企业网站</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 text-indigo-600 hover:underline">
-              <a href={`http://${detail.website}`} target="_blank" rel="noreferrer">{detail.website}</a>
+              <a href={`http://${detail.website}`} target="_blank" rel="noreferrer">
+                {detail.website}
+              </a>
             </dd>
           </div>
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -56,7 +75,9 @@ function Detail(props: Props): JSX.Element {
           </div>
           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">简介</dt>
-            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 cursor-text select-text whitespace-pre-wrap">{detail.introduction}</dd>
+            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2 cursor-text select-text whitespace-pre-wrap">
+              {detail.introduction}
+            </dd>
           </div>
         </dl>
       </div>
@@ -69,28 +90,25 @@ function getLayout(page: JSX.Element, props: Props): JSX.Element {
   const description = (
     <div className="mt-3 -mb-2">
       {detail.tags.map(tag => (
-        <span key={tag} className="inline-block bg-white bg-opacity-20 text-white text-xs tracking-wide rounded-md mb-2 mr-3 px-2 py-1">{tag}</span>
+        <span
+          key={tag}
+          className="inline-block bg-white bg-opacity-20 text-white text-xs tracking-wide rounded-md mb-2 mr-3 px-2 py-1"
+        >
+          {tag}
+        </span>
       ))}
     </div>
   );
 
   return (
-    <Layout title={title} description={description}>{page}</Layout>
+    <Layout title={title} description={description}>
+      {page}
+    </Layout>
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext): Promise<{ props: Props }> {
-  const { id } = context.params as { id: string };
-  const detail = await getCompanyDetail(id);
-
-  return {
-    props: {
-      title: detail.name,
-      detail,
-    },
-  };
-}
+export const getServerSideProps = fallbackSSR.createGetServerSidePropsFunction();
 
 Detail.getLayout = getLayout;
 
-export default Detail;
+export default fallbackSSR.withCSR(Detail);

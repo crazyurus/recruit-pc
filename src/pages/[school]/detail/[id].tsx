@@ -5,7 +5,23 @@ import Link from 'next/link';
 import { getSeminarDetail } from '../../../service';
 import type { GetServerSidePropsContext } from 'next';
 import type { SeminarDetail } from '../../../types';
+import FallbackSSR from '../../../fallback';
 import styles from './id.module.scss';
+
+async function getServerSidePropsOrigin(context: GetServerSidePropsContext): Promise<{ props: Props }> {
+  const detail = await getSeminarDetail(context.params as any);
+
+  return {
+    props: {
+      title: detail.title,
+      detail,
+    },
+  };
+}
+
+const fallbackSSR = new FallbackSSR({
+  getServerSideProps: getServerSidePropsOrigin,
+});
 
 interface Props {
   title: string;
@@ -20,12 +36,13 @@ function Detail(props: Props): JSX.Element {
       <p className={styles.content}>{detail.tips}</p>
     </Fragment>
   ) : null;
-  const major = detail.major.length > 0 ? (
-    <Fragment>
-      <div className={styles.title}>招聘专业</div>
-      <p className={styles.content}>{detail.major.join('、')}</p>
-    </Fragment>
-  ) : null;
+  const major =
+    detail.major.length > 0 ? (
+      <Fragment>
+        <div className={styles.title}>招聘专业</div>
+        <p className={styles.content}>{detail.major.join('、')}</p>
+      </Fragment>
+    ) : null;
   const basicInfo = (
     <div className={classNames(styles.basic, 'md:flex')}>
       <div className={classNames(styles.col, 'md:flex md:max-w-1/2 max-w-full')}>
@@ -65,10 +82,7 @@ function Detail(props: Props): JSX.Element {
     <div className="markdown-body p-6">
       {basicInfo}
       <div className={styles.title}>宣讲会内容</div>
-      <div
-        className={styles.content}
-        dangerouslySetInnerHTML={{ __html: detail.content }}
-      />
+      <div className={styles.content} dangerouslySetInnerHTML={{ __html: detail.content }} />
       {major}
       {detail.contact.email ? (
         <Fragment>
@@ -80,7 +94,10 @@ function Detail(props: Props): JSX.Element {
       ) : null}
       {tips}
       <div className="flex items-center justify-center py-4">
-        <div className="flex items-center rounded-md bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 px-5 py-2 cursor-pointer" onClick={handleShare}>
+        <div
+          className="flex items-center rounded-md bg-indigo-600 text-white hover:bg-indigo-700 active:bg-indigo-800 px-5 py-2 cursor-pointer"
+          onClick={handleShare}
+        >
           <ShareIcon className="h-5 w-5 mr-2" />
           <span>分享</span>
         </div>
@@ -89,15 +106,6 @@ function Detail(props: Props): JSX.Element {
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext): Promise<{ props: Props }> {
-  const detail = await getSeminarDetail(context.params as any);
+export const getServerSideProps = fallbackSSR.createGetServerSidePropsFunction();
 
-  return {
-    props: {
-      title: detail.title,
-      detail,
-    },
-  };
-}
-
-export default Detail;
+export default fallbackSSR.withCSR(Detail);
