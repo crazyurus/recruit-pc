@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
-import { getCompanyDetail } from '../../service';
+import React, { useEffect, Fragment } from 'react';
 import FallbackSSR from 'next-ssr-fallback';
+import useStore from '../../store';
+import { getCompanyDetail } from '../../service';
 import Layout from '../../components/layout';
 import type { GetServerSidePropsContext } from 'next';
 import type { Company } from '../../types';
@@ -27,7 +28,16 @@ interface Props {
 }
 
 function Detail(props: Props): JSX.Element {
-  const { detail } = props;
+  const { title, detail } = props;
+  const { setTitle } = useStore();
+
+  useEffect(() => {
+    setTitle(title);
+
+    return () => {
+      setTitle('');
+    };
+  }, [title]);
 
   return (
     <Fragment>

@@ -7,10 +7,12 @@ interface Store {
   page: number;
   size: number;
   search: string;
+  title: string;
   setCurrentPage(page: Store['page']): void;
   setPageSize(size: Store['size']): void;
   setSearch(search: Store['search']): void;
   setSchool(school: Store['school']): void;
+  setTitle(title: Store['title']): void;
 }
 
 const useStore = create<Store, [['zustand/immer', never]]>(
@@ -22,6 +24,7 @@ const useStore = create<Store, [['zustand/immer', never]]>(
     page: 1,
     size: 8,
     search: '',
+    title: '',
     setCurrentPage(page) {
       set(state => {
         state.page = page;
@@ -40,6 +43,12 @@ const useStore = create<Store, [['zustand/immer', never]]>(
     setSchool(school) {
       set(state => {
         state.school = school;
+      });
+    },
+    setTitle(title) {
+      document.title = title;
+      set(state => {
+        state.title = title;
       });
     },
   }))

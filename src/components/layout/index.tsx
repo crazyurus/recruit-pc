@@ -18,7 +18,7 @@ function Layout(props: PropsWithChildren<Props>): JSX.Element {
 }
 
 Layout.defaultProps = {
-  title: ' ',
+  title: '',
 };
 
 export default Layout;

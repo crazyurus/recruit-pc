@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import classNames from 'classnames';
+import FallbackSSR from 'next-ssr-fallback';
 import { ShareIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
+import useStore from '../../../store';
 import { getSeminarDetail } from '../../../service';
 import type { GetServerSidePropsContext } from 'next';
 import type { SeminarDetail } from '../../../types';
-import FallbackSSR from 'next-ssr-fallback';
 import styles from './id.module.scss';
 
 async function getServerSidePropsOrigin(context: GetServerSidePropsContext): Promise<{ props: Props }> {
@@ -29,7 +30,8 @@ interface Props {
 }
 
 function Detail(props: Props): JSX.Element {
-  const { detail } = props;
+  const { title, detail } = props;
+  const { setTitle } = useStore();
   const tips = detail.tips ? (
     <Fragment>
       <div className={styles.title}>本校提醒</div>
@@ -77,6 +79,14 @@ function Detail(props: Props): JSX.Element {
       alert('当前浏览器暂不支持分享');
     }
   };
+
+  useEffect(() => {
+    setTitle(title);
+
+    return () => {
+      setTitle('');
+    };
+  }, [title]);
 
   return (
     <div className="markdown-body p-6">
