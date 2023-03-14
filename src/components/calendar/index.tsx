@@ -28,14 +28,13 @@ function Calendar(props: Props): JSX.Element {
 
     while (start < end) {
       const day = start.format('YYYY-MM-DD');
-      const duration = start.diff(now);
 
       result.push({
         day,
         events: events[day] || [],
         properties: {
           isCurrentMonth: start.month() === month,
-          isToday: duration > 0 && duration < 86400000,
+          isToday: start.isSame(now, 'day'),
         },
       });
 
