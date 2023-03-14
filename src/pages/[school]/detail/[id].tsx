@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { getSeminarDetail } from '../../../service';
 import type { GetServerSidePropsContext } from 'next';
 import type { SeminarDetail } from '../../../types';
-import FallbackSSR from '../../../fallback';
+import FallbackSSR from 'next-ssr-fallback';
 import styles from './id.module.scss';
 
 async function getServerSidePropsOrigin(context: GetServerSidePropsContext): Promise<{ props: Props }> {

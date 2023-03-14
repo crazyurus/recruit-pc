@@ -15,6 +15,7 @@
     "dayjs": "^1.11.5",
     "immer": "^9.0.15",
     "next": "^13.0.0",
+    "next-ssr-fallback": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-use": "^17.4.0",

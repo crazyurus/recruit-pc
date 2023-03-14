@@ -19,6 +19,7 @@ specifiers:
   immer: ^9.0.15
   lint-staged: ^13.2.0
   next: ^13.0.0
+  next-ssr-fallback: ^1.0.0
   postcss: ^8.4.16
   prettier: ^2.8.4
   react: ^18.2.0
@@ -41,6 +42,7 @@ dependencies:
   dayjs: 1.11.5
   immer: 9.0.15
   next: 13.0.0_b7eik3blo2x47smm2jwaxpjfoq
+  next-ssr-fallback: 1.0.0_next@13.0.0+react@18.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
@@ -2936,6 +2938,16 @@ packages:
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
+
+  /next-ssr-fallback/1.0.0_next@13.0.0+react@18.2.0:
+    resolution: {integrity: sha512-mrARlxTj+m53IUnrDxkNmevRExO7K0YD/l4YyEB8U8nRtNxeYk/LQiHiH46OVRlCX68LJpz9LmQ1HgIu4KGgEA==}
+    peerDependencies:
+      next: '>=12.0.0'
+      react: '>=16.0.0'
+    dependencies:
+      next: 13.0.0_b7eik3blo2x47smm2jwaxpjfoq
+      react: 18.2.0
+    dev: false
 
   /next/13.0.0_b7eik3blo2x47smm2jwaxpjfoq:
     resolution: {integrity: sha512-puH1WGM6rGeFOoFdXXYfUxN9Sgi4LMytCV5HkQJvVUOhHfC1DoVqOfvzaEteyp6P04IW+gbtK2Q9pInVSrltPA==}

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { getCompanyDetail } from '../../service';
-import FallbackSSR from '../../fallback';
+import FallbackSSR from 'next-ssr-fallback';
 import Layout from '../../components/layout';
 import type { GetServerSidePropsContext } from 'next';
 import type { Company } from '../../types';
