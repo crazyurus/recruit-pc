@@ -2,6 +2,7 @@
   "name": "recruit-pc",
   "version": "1.0.0",
   "author": "Crazy Urus <crazyurus@vip.qq.com>",
+  "license": "BSD-3-Clause",
   "scripts": {
     "prepare": "husky install",
     "start": "next dev",
