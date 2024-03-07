@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react';
-import Head from 'next/head';
-import Layout from '../components/layout';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import React, { Fragment } from 'react';
+
+import Layout from '../components/layout';
 
 import '../styles/global.css';
 import '../styles/content.css';
@@ -36,6 +39,8 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
       {getLayout(<Component {...pageProps} />, pageProps)}
+      <Analytics />
+      <SpeedInsights />
     </Fragment>
   );
 }
