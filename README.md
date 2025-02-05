@@ -2,7 +2,7 @@
 
 就业招聘 PC 版
 
-https://recruit.crazyurus.cn
+https://recruit.crazyurus.com
 
 `React` + `Next.js` + `Tailwind CSS`
 
